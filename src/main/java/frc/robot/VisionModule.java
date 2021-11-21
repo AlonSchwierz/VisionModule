@@ -34,12 +34,18 @@ public class VisionModule {
         return Math.cos(Math.toRadians(cameraPitch - getPitch())) * getDistance();
     }
 
-    public static Pose2d getPose(Pose2d target) {
+    /**
+     *
+     * @param target is target
+     * @return x2 is the x coordinats of the robot
+     * @return y2 is the y coordinats of the robot
+     */
+    public static Pose2d getPose(Pose2d target, double cameraPitch) {
         double x2 = target.getTranslation().getX();
         double y2 = target.getTranslation().getY();
         return new Pose2d(
-                x2 - getDistance() * Math.cos(Math.toRadians(90 - getYaw())),
-                y2 - getDistance() * Math.sin(Math.toRadians(90 - getYaw())),
+                x2 - getX(cameraPitch) * Math.cos(Math.toRadians(90 - getYaw())),
+                y2 - getX(cameraPitch) * Math.sin(Math.toRadians(90 - getYaw())),
                 new Rotation2d(Math.toRadians(getYaw()))
         );
     }
