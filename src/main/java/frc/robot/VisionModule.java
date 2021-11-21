@@ -3,8 +3,11 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
 public class VisionModule {
+
     private static NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private static NetworkTable table = inst.getTable("CV");
     private static NetworkTableEntry Distance = table.getEntry("distance");
@@ -31,4 +34,13 @@ public class VisionModule {
         return Math.cos(Math.toRadians(cameraPitch - getPitch())) * getDistance();
     }
 
+    public static Pose2d getPose(Pose2d target) {
+        double x2 = target.getTranslation().getX();
+        double y2 = target.getTranslation().getY();
+        return new Pose2d(
+                x2 - getDistance() * Math.cos(Math.toRadians(90 - getYaw())),
+                y2 - getDistance() * Math.sin(Math.toRadians(90 - getYaw())),
+                new Rotation2d(Math.toRadians(getYaw()))
+        );
+    }
 }
