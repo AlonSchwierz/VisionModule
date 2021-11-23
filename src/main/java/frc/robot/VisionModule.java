@@ -35,10 +35,8 @@ public class VisionModule {
     }
 
     /**
-     *
-     * @param target is target
-     * @return x2 is the x coordinats of the robot
-     * @return y2 is the y coordinats of the robot
+     * @param target is target - x2 for x values of the robot and y2 for y values of the robot at a certain time.
+     * the function returns the x and y values and rotation of the robot at a certain time
      */
     public static Pose2d getPose(Pose2d target, double cameraPitch) {
         double x2 = target.getTranslation().getX();
